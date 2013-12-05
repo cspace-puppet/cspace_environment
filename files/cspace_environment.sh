@@ -1,0 +1,11 @@
+export CSPACE_JEESERVER_HOME="/usr/local/share/apache-tomcat-6.0.33"
+export CATALINA_HOME=$CSPACE_JEESERVER_HOME
+export CATALINA_PID =
+export CATALINA_OPTS =
+export JAVA_HOME =
+export ANT_OPTS =
+export MAVEN_OPTS =
+export DB_USER =
+export DB_PASSWORD =
+export DB_PASSWORD_NUXEO =
+export DB_PASSWORD_CSPACE =
