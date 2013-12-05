@@ -1,1 +1,1 @@
-include cspace_environment
+class { 'cspace_environment': }

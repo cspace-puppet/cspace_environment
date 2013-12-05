@@ -11,7 +11,9 @@
 # Sample Usage:
 #
 class cspace_environment {
-  
+	
+	include cspace_environment::tempdir
+	
   user {'cspace':
     ensure => present,
     home => '/home/cspace',
