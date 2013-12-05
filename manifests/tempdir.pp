@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 class cspace_environment::tempdir {
-	
+		
 	# ---------------------------------------------------------
 	# Identify the system temporary directory
 	# ---------------------------------------------------------

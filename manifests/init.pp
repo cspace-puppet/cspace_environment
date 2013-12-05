@@ -1,6 +1,6 @@
 # Class: cspace_environment
 #
-# This module manages cspace_environment
+# This module manages environment values pertinent to a CollectionSpace server instance
 #
 # Parameters: none
 #
@@ -11,7 +11,5 @@
 # Sample Usage:
 #
 class cspace_environment {
-	
-	include cspace_environment::tempdir
 	
 }
