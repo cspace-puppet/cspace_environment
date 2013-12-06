@@ -14,6 +14,10 @@
 class cspace_environment::user ( $user_acct_name = 'cspace' ) {
 	
 	$os_family = $cspace_environment::osfamily::os_family
+	
+	# FIXME: Need to specify initial passwords for these user accounts.
+	# See requirements for each OS here:
+	# http://docs.puppetlabs.com/references/latest/type.html#user-attribute-password
 
 	case $os_family {
 	    # Supported Linux OS families
