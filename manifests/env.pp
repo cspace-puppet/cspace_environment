@@ -18,12 +18,20 @@ class cspace_environment::env {
 	# ---------------------------------------------------------
 
 	# Declare default values
-	#
-	# The values below should be reviewed and changed as needed.
+	
+	# FIXME: The values below should be reviewed and changed as needed.
 	# In particular, password values below are set to easily-guessable
-	# defaults and MUST be changed. (We might consider generating values
-	# for password defaults that are pseudo-random and not easily guessed.)
+	# defaults and MUST be changed before use.
 	#
+	# We might instead consider generating per-execution values for
+	# password defaults that are pseudo-random and not easily guessed.
+	#
+	# One simple way - compatible with at least some Linux distros and OS X,
+	# and reliant only on 'uuidgen', 'tr', and 'cut', rather than on the
+	# presence of any particular hash utility - is by extracting a slice from
+	# a Type 4 UUID and incorporating into a generated password; e.g.:
+	# "uuidgen | tr '[:upper:]' '[:lower:]' | cut -c 1-8"
+	
 	# FIXME: the values below are hard-coded global defaults. They
 	# could more flexibly be read in from a per-node Environment,
 	# from other external configuration, or from Heira.
