@@ -27,6 +27,7 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
 				system     => false,
 				# FIXME: Verify that this ID is unused
 				uid        => '595',
+				shell      => '/bin/bash',
 			}
 	    }
 	    # OS X
@@ -44,6 +45,7 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
 				# 'system => false' doesn't appear to be sufficient
 				# to ensure a uid is assigned in that range.
 				uid        => '595',
+				shell      => '/bin/bash',
 			}
 			# See Nigel Kersten's remarks on creating OS X home directories:
 			# https://groups.google.com/d/msg/puppet-users/dykZSWMqO9w/BsiGsGp0gyYJ
