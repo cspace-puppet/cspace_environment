@@ -12,13 +12,7 @@
 #
 class cspace_environment {
     
-    # Create a 'cspace' user account
-	# user { 'Create cspace user account':
-	# 	ensure  => present,
-	# 	name    => 'cspace',
-	# 	# home => '/home/cspace', # System-dependent?
-	# 	# managehome => true, # Not available with 'directoryservice' provider
-	# }
+
   
   	# Create a (currently placeholder) set of CollectionSpace
 	# server-related environment variables for all users.
