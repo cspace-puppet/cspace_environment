@@ -4,7 +4,7 @@
   "summary": "CollectionSpace Environment Values Management.",
   "author": "CollectionSpace",
   "description": "Manages environment values pertinent to a CollectionSpace server instance.",
-  "dependencies": [ "cspace-cspace_environment" ],
+  "dependencies": [],
   "types": [],
   "checksums": {},
   "source": "https://github.com/cspace-puppet/cspace_environment.git",
