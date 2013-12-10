@@ -18,7 +18,7 @@ class cspace_environment::env {
   # ---------------------------------------------------------
 
   # Declare default values
-	
+
   # FIXME: The values below should be reviewed and changed as needed.
   # In particular, password values below are set to easily-guessable
   # defaults and MUST be changed before use.
