@@ -21,8 +21,10 @@ class cspace_environment::tempdir {
 
   $tmpdir = $::env_tmpdir # Unix, Linux, and OS X
   $temp = $::env_temp # Microsoft Windows
-  notify { "Unix/Linux/OS X TMPDIR is ${tmpdir}": }
-  notify { "Windows TEMP is ${temp}": }
+  
+  # Uncomment for debugging:
+  # notify { "Unix/Linux/OS X TMPDIR is ${tmpdir}": }
+  # notify { "Windows TEMP is ${temp}": }
 
   # FIXME: This default/fallback directory is only
   # relevant for most Unix-like systems.  See
@@ -39,6 +41,5 @@ class cspace_environment::tempdir {
   else {
     $system_temp_directory = $default_temporary_directory
   }
-  notify { "Temporary directory is ${system_temp_directory}": }
 
 }
