@@ -1,13 +1,13 @@
 {
   "name": "cspace-cspace_environment",
   "version": "4.1 alpha",
-  "summary": "CollectionSpace Environment Values Management.",
+  "summary": "CollectionSpace Environment Values Management",
   "author": "CollectionSpace",
-  "description": "Manages environment values pertinent to a CollectionSpace server instance.",
+  "description": "Manages environment values pertinent to a CollectionSpace server instance",
   "dependencies": [],
   "types": [],
   "checksums": {},
   "source": "https://github.com/cspace-puppet/cspace_environment.git",
   "project_page": "http://wiki.collectionspace.org",
-  "license": " Educational Community License, Version 2.0"
+  "license": "Educational Community License, Version 2.0"
 }
