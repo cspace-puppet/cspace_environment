@@ -25,7 +25,7 @@ class cspace_environment::osbits {
       $os_bits = '64-bit'
     }
     # Other hardware models following this naming convention,
-    # with a non-digit character followed by '64'
+    # ending in a non-digit character followed by '64'
     /^.*?\D64$/: {
       $os_bits = '64-bit'
     }
@@ -34,7 +34,7 @@ class cspace_environment::osbits {
       $os_bits = '32-bit'
     }    
     default: {
-       fail( 'Unknown hardware model when identifying OS memory address size' )
+      fail( 'Unknown hardware model when attempting to identify OS memory address size' )
     }
   }
   
