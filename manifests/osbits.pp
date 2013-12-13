@@ -11,6 +11,9 @@
 #
 # Sample Usage:
 #
+
+# TODO: This manifest could well be turned into a custom fact in Facter.  See:
+# http://docs.puppetlabs.com/guides/custom_facts.html#adding-custom-facts-to-facter
 class cspace_environment::osbits {
 
   # Josh Cooper noted: "The fact name hardwaremodel is a bit misleading,
