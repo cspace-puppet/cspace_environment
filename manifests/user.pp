@@ -12,6 +12,8 @@
 # Sample Usage:
 #
 
+include cspace_environment::osfamily
+
 class cspace_environment::user ( $user_acct_name = 'cspace' ) {
 
   $os_family = $cspace_environment::osfamily::os_family
