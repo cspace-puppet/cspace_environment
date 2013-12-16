@@ -1,6 +1,6 @@
 # Class: cspace_environment::osbits
 #
-# This class identifies the memory address size of the active operating system
+# This class identifies the virtual address space of the active operating system
 # (with values returned currently expected to be either 64-bit or 32-bit)
 #
 # Parameters: none
