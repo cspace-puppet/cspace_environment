@@ -37,7 +37,7 @@ class cspace_environment::osbits {
       $os_bits = '32-bit'
     }    
     default: {
-      fail( 'Unknown hardware model when attempting to identify OS memory address size' )
+      fail( 'Unknown hardware model when attempting to identify OS virtual address space' )
     }
   }
   
