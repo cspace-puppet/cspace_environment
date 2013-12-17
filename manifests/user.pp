@@ -1,7 +1,6 @@
-# Class: cspace_environment
+# Class: cspace_environment::user
 #
-# This module manages the server admin user account for a
-# CollectionSpace server instance
+# Manages the server admin user account for a CollectionSpace server instance.
 #
 # Parameters: none
 #
@@ -68,7 +67,9 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         require => User[ 'Ensure OS X user account' ]
       }
     }
-    # TODO: Support adding this user account under Microsoft Windows
+    # Microsoft Windows
+    windows: {
+    }
     default: {
     }
   }

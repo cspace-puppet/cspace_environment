@@ -1,6 +1,6 @@
 # Class: cspace_environment::osfamily
 #
-# This class identifies the operating system family
+# Identifies the operating system family.
 #
 # Parameters: none
 #
@@ -42,7 +42,7 @@ class cspace_environment::osfamily {
         $os_family = $::operatingsystem
       }
     }
-    } else {
-      $os_family = $::osfamily
-    }
+  } else {
+    $os_family = $::osfamily
+  }
 }

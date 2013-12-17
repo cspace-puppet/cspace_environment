@@ -1,6 +1,6 @@
 # Class: cspace_environment::env
 #
-# This class manages environment variables used during the build and deployment
+# Manages environment variables used during the build and deployment
 # of a CollectionSpace server instance.
 #
 # Parameters: none
@@ -141,8 +141,13 @@ class cspace_environment::env {
     $maven_opts = $default_maven_opts
   }
 
-  # The value of JAVA_HOME is not set here; it is assumed to be present
-  # in Ant and Maven's environments.
+  # TODO: Add setting of the JAVA_HOME environment variable.
+  #
+  # The value of JAVA_HOME is not currently set here; it is
+  # assumed to have been set during Java installation and hence
+  # to be available to Ant, Maven, and other Java-based tools.
+  # Nonetheless, it would be a useful defensive measure to
+  # check for its presence and set it if not present.
   
   $cspace_env = {
     'ANT_OPTS'              => $ant_opts,
@@ -158,9 +163,9 @@ class cspace_environment::env {
     'MAVEN_OPTS'            => $maven_opts,
   }
   
-  # Convert the hash above to an array, whose values consist
-  # of keys joined to values with equal signs ('=').
+  # 'Clone' the hash above as an array, whose values consist
+  # of keys joined to values via equal signs ('=').
   # E.g. [ 'ANT_OPTS=value', 'CATALINA_HOME=value', ...]
-  $cspace_env_vars = join_keys_to_values( $cspace_env, "=" )
+  $cspace_env_vars = join_keys_to_values( $cspace_env, '=' )
 
 }

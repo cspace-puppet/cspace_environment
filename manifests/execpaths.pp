@@ -1,6 +1,6 @@
 # Class: cspace_environment::osfamily
 #
-# This class identifies a default set of paths for locating executable files
+# Identifies a default set of paths for locating executable files.
 #
 # Parameters: none
 #

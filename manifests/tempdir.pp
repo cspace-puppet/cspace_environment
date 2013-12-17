@@ -1,6 +1,6 @@
 # Class: cspace_environment::tempdir
 #
-# This class identifies the system temporary directory
+# Identifies the system temporary directory.
 #
 # Parameters: none
 #

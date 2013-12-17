@@ -1,6 +1,6 @@
 # Class: cspace_environment::osbits
 #
-# This class identifies the virtual address space of the active operating system
+# Identifies the virtual address space of the active operating system
 # (with values returned currently expected to be either 64-bit or 32-bit)
 #
 # Parameters: none
@@ -37,7 +37,7 @@ class cspace_environment::osbits {
       $os_bits = '32-bit'
     }    
     default: {
-      fail( 'Unknown hardware model when attempting to identify OS virtual address space' )
+      fail( 'Could not identify OS virtual address space: unknown hardware model \'$::hardwaremodel\'' )
     }
   }
   
