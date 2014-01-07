@@ -17,7 +17,7 @@ include cspace_environment::osfamily
 class cspace_environment::user ( $user_acct_name = 'cspace' ) {
 
   $os_family = $cspace_environment::osfamily::os_family
-  $env_vars  = $cspace_environment::env::cspace_env_vars
+  $env_vars  = $cspace_environment::env::cspace_env # hash
   
   # FIXME: Need to specify initial passwords for these user accounts.
   # See requirements for each OS here:

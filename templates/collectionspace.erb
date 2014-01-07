@@ -1,5 +1,8 @@
-(
-  <% env_vars.each_pair do |key, value| %>
-    'export <%= key %>=\'<%= key %>\''
-  <% end %>
-); 
+$environment_variables = <%= @env_vars %>
+<% if environment_variables %>
+  (
+    <%= environment_variables %>.each_pair do |key, value| %>
+      'export <%= key %>=\'<%= value %>\''
+    <% end %>
+  );
+<% end %>
