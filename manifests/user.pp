@@ -11,12 +11,14 @@
 # Sample Usage:
 #
 
+include cspace_environment::env
 include cspace_environment::osfamily
 
 class cspace_environment::user ( $user_acct_name = 'cspace' ) {
 
   $os_family = $cspace_environment::osfamily::os_family
-
+  $env_vars  = $cspace_environment::env::cspace_env_vars
+  
   # FIXME: Need to specify initial passwords for these user accounts.
   # See requirements for each OS here:
   # http://docs.puppetlabs.com/references/latest/type.html#user-attribute-password
@@ -35,6 +37,30 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         uid        => '595',
         shell      => '/bin/bash',
       }
+      file { 'Ensure profile.d directory':
+        path    => '/etc/profile.d',
+        ensure  => directory,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        require => User[ 'Ensure Linux user account' ],
+      }
+      file { 'Set CollectionSpace environment variables':
+        path    => "/home/${user_acct_name}/collectionspace.conf",
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => template('cspace_environment/collectionspace.erb'),
+        require => File[ 'Ensure profile.d directory' ],
+      }
+      # file { 'Set CollectionSpace environment variables':
+      #   path    => "/home/${user_acct_name}/.bash_profile",
+      #   owner   => 'root',
+      #   group   => 'root',
+      #   mode    => '0644',
+      #   content => template('cspace_environment/bash_profile.erb'),
+      #   require => User[ 'Ensure Linux user account' ],
+      # }
     }
     # OS X
     darwin: {
