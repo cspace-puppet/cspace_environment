@@ -37,30 +37,30 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         uid        => '595',
         shell      => '/bin/bash',
       }
-      file { 'Ensure profile.d directory':
-        path    => '/etc/profile.d',
-        ensure  => directory,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        require => User[ 'Ensure Linux user account' ],
-      }
-      file { 'Set CollectionSpace environment variables':
-        path    => "/etc/profile.d/collectionspace.conf",
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => template('cspace_environment/collectionspace.erb'),
-        require => File[ 'Ensure profile.d directory' ],
-      }
-      # file { 'Set CollectionSpace environment variables':
-      #   path    => "/home/${user_acct_name}/.bash_profile",
+      # file { 'Ensure profile.d directory':
+      #   path    => '/etc/profile.d',
+      #   ensure  => directory,
       #   owner   => 'root',
       #   group   => 'root',
       #   mode    => '0644',
-      #   content => template('cspace_environment/bash_profile.erb'),
       #   require => User[ 'Ensure Linux user account' ],
       # }
+      # file { 'Set CollectionSpace environment variables globally':
+      #   path    => "/etc/profile.d/collectionspace.conf",
+      #   owner   => 'root',
+      #   group   => 'root',
+      #   mode    => '0644',
+      #   content => template('cspace_environment/collectionspace.erb'),
+      #   require => File[ 'Ensure profile.d directory' ],
+      # }
+      file { 'Set CollectionSpace environment variables for CollectionSpace admin user':
+        path    => "/home/${user_acct_name}/.profile",
+        owner   => $user_acct_name,
+        group   => $user_acct_name,
+        mode    => '0644',
+        content => template('cspace_environment/profile.erb'),
+        require => User[ 'Ensure Linux user account' ],
+      }
     }
     # OS X
     darwin: {
