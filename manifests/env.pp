@@ -45,7 +45,7 @@ class cspace_environment::env {
   # http://docs.puppetlabs.com/guides/environment.html
   # http://docs.puppetlabs.com/hiera/1/
   #
-  $default_ant_opts              = '-Xmx768m -XX:MaxPermSize=512m XY'
+  $default_ant_opts              = '-Xmx768m -XX:MaxPermSize=512m'
   $default_catalina_home         = '/usr/local/share/apache-tomcat-6.0.33'
   $default_catalina_opts         = '-Xmx1024m -XX:MaxPermSize=384m'
   $default_catalina_pid          = "${default_catalina_home}/bin/tomcat.pid"
