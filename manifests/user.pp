@@ -46,7 +46,7 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         require => User[ 'Ensure Linux user account' ],
       }
       file { 'Set CollectionSpace environment variables':
-        path    => "/home/${user_acct_name}/collectionspace.conf",
+        path    => "/etc/profile.d/collectionspace.conf",
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
