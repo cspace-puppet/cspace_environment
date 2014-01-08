@@ -46,12 +46,12 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
       # See https://www.gnu.org/software/bash/manual/bashref.html#Bash-Startup-Files
       
       file { 'Ensure presence of bashrc file':
-        path    => "/home/${user_acct_name}/.bashrc,
+        path    => "/home/${user_acct_name}/.bashrc",
         mode    => '0700',
         require => User[ 'Ensure Linux user account' ],
       }
-      $starting_delimiter = "# Start of environment variables managed by Puppet code"
-      $ending_delimiter   = "# End of environment variables managed by Puppet code"
+      $starting_delimiter = '# Start of environment variables managed by Puppet code'
+      $ending_delimiter   = '# End of environment variables managed by Puppet code'
       file_line { 'Write environment variables to bash profile':
         ensure  => present,
         path    => "/home/${user_acct_name}/.bashrc",
