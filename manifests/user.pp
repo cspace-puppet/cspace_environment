@@ -39,14 +39,14 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         shell      => '/bin/bash',
       }
       
-      file { 'Write environment variables to profile for CollectionSpace admin user':
-        path    => "/home/${user_acct_name}/.profile",
-        owner   => $user_acct_name,
-        group   => $user_acct_name,
-        mode    => '0644',
-        content => template('cspace_environment/profile.erb'),
-        require => User[ 'Ensure Linux user account' ],
-      }
+      # file { 'Write environment variables to profile for CollectionSpace admin user':
+      #   path    => "/home/${user_acct_name}/.profile",
+      #   owner   => $user_acct_name,
+      #   group   => $user_acct_name,
+      #   mode    => '0644',
+      #   content => template('cspace_environment/profile.erb'),
+      #   require => User[ 'Ensure Linux user account' ],
+      # }
       
       # Since under the bash shell, the .bash_profile file will be read in
       # preference to the .profile file, source the latter from the former
@@ -56,11 +56,27 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         path    => "/home/${user_acct_name}/.bash_profile",
         require => User[ 'Ensure Linux user account' ],
       }
-
+      $delimiter          = 'of environment variables managed by Puppet code'
+      $starting_delimiter = "# Start ${delimiter}"
+      $ending_delimiter   = "# End ${delimiter}"
+      file_line { 'Write starting delimiter':
+        path    => "/home/${user_acct_name}/.bash_profile",
+        # line    => 'source $HOME/.profile',
+        line    => $starting_delimiter,
+        require => File[ 'Ensure presence of bash profile file' ],
+      }
+      file_line { 'Write ending delimiter':
+        path    => "/home/${user_acct_name}/.bash_profile",
+        # line    => 'source $HOME/.profile',
+        line    => $ending_delimiter,
+        require => File[ 'Write starting delimiter' ],
+      }
       file_line { 'Source profile from within bash profile':
         path    => "/home/${user_acct_name}/.bash_profile",
-        line    => 'source $HOME/.profile',
-        require => File[ 'Ensure presence of bash profile file' ],
+        # line    => 'source $HOME/.profile',
+        line    => template('cspace_environment/profile.erb'),
+        match   => $starting_delimiter,
+        require => File[ 'Write ending delimiter' ],
       }
     }
     # OS X
