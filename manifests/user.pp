@@ -39,20 +39,13 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         shell      => '/bin/bash',
       }
       
-      # file { 'Write environment variables to profile for CollectionSpace admin user':
-      #   path    => "/home/${user_acct_name}/.profile",
-      #   owner   => $user_acct_name,
-      #   group   => $user_acct_name,
-      #   mode    => '0644',
-      #   content => template('cspace_environment/profile.erb'),
-      #   require => User[ 'Ensure Linux user account' ],
-      # }
-      
-      # Since under the bash shell, the .bash_profile file will be read in
-      # preference to the .profile file, source the latter from the former
+      # TODO: Find a way to get builds to work in the cspace_source module when
+      # environment variables are declared (in order of preference) in .profile
+      # or in .bash_profile, rather than directly to .bashrc
+      # Both of those files are preferable locations for those declarations than .bashrc 
       # See https://www.gnu.org/software/bash/manual/bashref.html#Bash-Startup-Files
       
-      file { 'Ensure presence of bash profile file':
+      file { 'Ensure presence of bashrc file':
         path    => "/home/${user_acct_name}/.bashrc,
         mode    => '0700',
         require => User[ 'Ensure Linux user account' ],
@@ -63,7 +56,7 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         ensure  => present,
         path    => "/home/${user_acct_name}/.bashrc",
         line    => template('cspace_environment/env_vars.erb'),
-        require => File[ 'Ensure presence of bash profile file' ],
+        require => File[ 'Ensure presence of bashrc file' ],
       }
     }
     # OS X
