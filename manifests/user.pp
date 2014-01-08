@@ -50,7 +50,7 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         require => User[ 'Ensure Linux user account' ],
       }
       $starting_delimiter = '# Start of environment variable declarations inserted by Puppet code'
-      $ending_delimiter   = '# End of environment variables declations inserted by Puppet code'
+      $ending_delimiter   = '# End of environment variable declations inserted by Puppet code'
       file_line { 'Write environment variables to bash profile':
         ensure  => present,
         path    => "/home/${user_acct_name}/.bashrc",
