@@ -12,6 +12,7 @@
 # Sample Usage:
 #
 
+include cspace_environment::osfamily
 include stdlib # for 'empty()'
 
 class cspace_environment::env {
@@ -24,7 +25,7 @@ class cspace_environment::env {
 
   # FIXME: The values below should be reviewed and changed as needed.
   # In particular, password values below are set to easily-guessable
-  # defaults and MUST be changed before use.
+  # defaults and MUST be changed before production use.
   #
   # We might instead consider generating per-execution values for
   # password defaults that are pseudo-random and not easily guessed.
@@ -44,7 +45,7 @@ class cspace_environment::env {
   # and specifically:
   # http://docs.puppetlabs.com/guides/environment.html
   # http://docs.puppetlabs.com/hiera/1/
-  #
+  
   $default_ant_opts              = '-Xmx768m -XX:MaxPermSize=512m'
   $default_catalina_home         = '/usr/local/share/apache-tomcat-6.0.33'
   $default_catalina_opts         = '-Xmx1024m -XX:MaxPermSize=384m'
@@ -54,6 +55,35 @@ class cspace_environment::env {
   $default_db_password_nuxeo     = 'nuxeo'
   $default_db_password           = 'postgres'
   $default_db_user               = 'postgres'
+  
+  # Default JAVA_HOME value varies by platform
+  $os_family = $cspace_environment::osfamily::os_family
+  case $os_family {
+    RedHat, Debian: {
+      # The variable below was added as a custom Facter fact via
+      # the lib/facter/java_home_alternatives.rb script in this module.
+      if ( ($::java_home_alternatives != undef) and (! empty($::java_home_alternatives)) ) {
+        $default_java_home        = $::java_home_alternatives
+      }
+      else {
+        # See http://www.oracle.com/technetwork/java/javase/install-linux-rpm-137089.html
+        $default_oracle_java_home = '/usr/java/latest'
+        $default_java_home        = $default_oracle_java_home
+      }      
+    }
+    # OS X
+    darwin: {
+      # The variable below was added as a custom Facter fact via
+      # the lib/facter/java_home_osx.rb script in this module.
+      $default_java_home          = $::java_home_osx
+    }
+    # Microsoft Windows
+    windows: {
+    }
+    default: {
+    }
+  } # end case $os_family
+    
   $default_lc_all                = 'LC_ALL=en_US.UTF-8'
   $default_maven_opts            =
     '-Xmx768m -XX:MaxPermSize=512m -Dfile.encoding=UTF-8'
@@ -127,6 +157,13 @@ class cspace_environment::env {
     $db_user = $default_db_user
   }
 
+  if ( ($::env_java_home != undef) and (! empty($::env_java_home)) ) {
+    $java_home = $::env_java_home
+  }
+  else {
+    $java_home = $default_java_home
+  }
+
   if ( ($::env_lc_all != undef) and (! empty($::env_lc_all)) ) {
     $lc_all = $::env_lc_all
   }
@@ -159,6 +196,7 @@ class cspace_environment::env {
     'DB_PASSWORD_NUXEO'     => $db_password_nuxeo,
     'DB_PASSWORD'           => $db_password,
     'DB_USER'               => $db_user,
+    'JAVA_HOME'             => $java_home,
     'LC_ALL'                => $lc_all,
     'MAVEN_OPTS'            => $maven_opts,
   }
