@@ -1,6 +1,6 @@
-<% if (@env_vars != nil) && (@env_vars.respond_to?(:to_hash)) then %>
 <%= @starting_delimiter %>
+<% if (@env_vars != nil) && (@env_vars.respond_to?(:to_hash)) then %>
 <% @env_vars.each_pair do |key, value| %>export <%= key %>='<%= value %>'
-<%= @ending_delimiter %>
 <% end %> <%# end env_vars.each_pair do %>
 <% end %> <%# end if %>
+<%= @ending_delimiter %>
