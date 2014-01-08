@@ -56,27 +56,13 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
         path    => "/home/${user_acct_name}/.bash_profile",
         require => User[ 'Ensure Linux user account' ],
       }
-      $delimiter          = 'of environment variables managed by Puppet code'
-      $starting_delimiter = "# Start ${delimiter}"
-      $ending_delimiter   = "# End ${delimiter}"
-      file_line { 'Write starting delimiter':
+      $starting_delimiter = "# Start of environment variables managed by Puppet code"
+      $ending_delimiter   = "# End of environment variables managed by Puppet code"
+      file_line { 'Write environment variables to bash profile':
+        ensure  => present,
         path    => "/home/${user_acct_name}/.bash_profile",
-        # line    => 'source $HOME/.profile',
-        line    => $starting_delimiter,
+        line    => template('cspace_environment/bash_profile.erb'),
         require => File[ 'Ensure presence of bash profile file' ],
-      }
-      file_line { 'Write ending delimiter':
-        path    => "/home/${user_acct_name}/.bash_profile",
-        # line    => 'source $HOME/.profile',
-        line    => $ending_delimiter,
-        require => File[ 'Write starting delimiter' ],
-      }
-      file_line { 'Source profile from within bash profile':
-        path    => "/home/${user_acct_name}/.bash_profile",
-        # line    => 'source $HOME/.profile',
-        line    => template('cspace_environment/profile.erb'),
-        match   => $starting_delimiter,
-        require => File[ 'Write ending delimiter' ],
       }
     }
     # OS X
