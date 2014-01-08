@@ -60,7 +60,7 @@ class cspace_environment::user ( $user_acct_name = 'cspace' ) {
       file_line { 'Source profile from within bash profile':
         path    => "/home/${user_acct_name}/.bash_profile",
         line    => 'source $HOME/.profile',
-        require => User[ 'Ensure presence of bash profile file' ],
+        require => File[ 'Ensure presence of bash profile file' ],
       }
     }
     # OS X
