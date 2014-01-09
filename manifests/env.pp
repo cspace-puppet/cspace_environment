@@ -80,11 +80,9 @@ class cspace_environment::env {
       elsif (directory_exists($default_oracle_java_home)) {
         $default_java_home        = $default_oracle_java_home
       }
-      # Otherwise fail. (Without a valid JAVA_HOME, Services layer builds will later fail.)
       else {
-        fail('Could not find suitable value for JAVA_HOME environment variable.')
+        notice('Could not find suitable value for JAVA_HOME environment variable.')
       }    
-      notice("default_java_home=${default_java_home}")
     }
     # OS X
     darwin: {
