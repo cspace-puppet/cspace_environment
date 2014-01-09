@@ -12,10 +12,12 @@
 # Sample Usage:
 #
 
-include cspace_environment::osfamily
 include stdlib # for 'empty()'
 
 class cspace_environment::env {
+  
+  include cspace_environment::osfamily
+  $os_family = $cspace_environment::osfamily::os_family
 
   # ---------------------------------------------------------
   # Declare environment variables
@@ -57,7 +59,6 @@ class cspace_environment::env {
   $default_db_user               = 'postgres'
   
   # Default JAVA_HOME value varies by platform
-  $os_family = $cspace_environment::osfamily::os_family
   case $os_family {
     RedHat, Debian: {
       # The variable below was added as a custom Facter fact via
