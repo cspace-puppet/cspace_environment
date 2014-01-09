@@ -179,14 +179,6 @@ class cspace_environment::env {
     $maven_opts = $default_maven_opts
   }
 
-  # TODO: Add setting of the JAVA_HOME environment variable.
-  #
-  # The value of JAVA_HOME is not currently set here; it is
-  # assumed to have been set during Java installation and hence
-  # to be available to Ant, Maven, and other Java-based tools.
-  # Nonetheless, it would be a useful defensive measure to
-  # check for its presence and set it if not present.
-  
   $cspace_env = {
     'ANT_OPTS'              => $ant_opts,
     'CATALINA_HOME'         => $catalina_home,
