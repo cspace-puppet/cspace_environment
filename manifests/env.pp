@@ -61,16 +61,30 @@ class cspace_environment::env {
   # Default JAVA_HOME value varies by platform
   case $os_family {
     RedHat, Debian: {
+      notice("java_home_alternatives=${::java_home_alternatives}")
+      # See http://www.oracle.com/technetwork/java/javase/install-linux-rpm-137089.html
+      $default_oracle_java_home = '/usr/java/latest'
       # The variable below was added as a custom Facter fact via
       # the lib/facter/java_home_alternatives.rb script in this module.
-      if ( ($::java_home_alternatives != undef) and (! empty($::java_home_alternatives)) ) {
+      #
+      # If the 'alternatives' system returns the default path to the 'java'
+      # executable file, set JAVA_HOME to its relevant parent directory, if present.
+      if (
+           ($::java_home_alternatives != undef) and
+           (! empty($::java_home_alternatives)) and
+           (directory_exists($::java_home_alternatives))
+         ) {
         $default_java_home        = $::java_home_alternatives
       }
-      else {
-        # See http://www.oracle.com/technetwork/java/javase/install-linux-rpm-137089.html
-        $default_oracle_java_home = '/usr/java/latest'
+      # Otherwise, use the default directory for Oracle Java installations, if present.
+      elsif (directory_exists($default_oracle_java_home)) {
         $default_java_home        = $default_oracle_java_home
-      }      
+      }
+      # Otherwise fail. (Without a valid JAVA_HOME, Services layer builds will later fail.)
+      else {
+        fail('Could not find suitable value for JAVA_HOME environment variable.')
+      }    
+      notice("default_java_home=${default_java_home}")
     }
     # OS X
     darwin: {
