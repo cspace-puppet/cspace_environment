@@ -20,6 +20,12 @@ class cspace_environment::env_java_home {
   include cspace_environment::osfamily
   $os_family = $cspace_environment::osfamily::os_family
 
+  $msg_no_java_home_default = join(
+    [
+      'Could not identify a suitable default value for the JAVA_HOME environment variable.',
+      ' This could be because Oracle Java SE has not yet been installed.'
+    ])
+    
   case $os_family {
     
     Debian: {
@@ -36,7 +42,7 @@ class cspace_environment::env_java_home {
         $default_java_home        = $::java_home_alternatives
       }
       else {
-        notice('Could not find suitable value for JAVA_HOME environment variable.')
+        notice( $msg_no_java_home_default )
         $default_java_home        = ''
       }
     }
@@ -65,7 +71,7 @@ class cspace_environment::env_java_home {
         $default_java_home        = $default_oracle_java_home
       }
       else {
-        notice('Could not find suitable value for JAVA_HOME environment variable.')
+        notice( $msg_no_java_home_default )
         $default_java_home        = ''
       }
     }
@@ -82,7 +88,7 @@ class cspace_environment::env_java_home {
         $default_java_home          = $::java_home_osx
       }
       else {
-        notice('Could not find suitable value for JAVA_HOME environment variable.')
+        notice( $msg_no_java_home_default )
         $default_java_home        = ''
       }
     }
