@@ -7,7 +7,8 @@
 
 module Puppet::Parser::Functions
   newfunction(:directory_exists, :type => :rvalue, :doc => <<-ENDDOC
-Identifies whether a directory exists, given its path
+Identifies whether a directory exists, given its full filesystem path
+(or else the full filesystem path of a symlink that points to a directory)
 
 *Examples:*
 
@@ -19,9 +20,9 @@ Will return (on relevant systems):
 ENDDOC
   ) do |args|
     raise(Puppet::ParseError, "directory_exists(): Wrong number of arguments " +
-      "given (got #{args.size} but expected 1)") if (args.size < 1 or args.size > 1)
+      " (got #{args.size} but expected 1)") if (args.size != 1)
     dirpath = args[0]
-    if File.exists?(dirpath) && File.directory?(dirpath)
+    if FileTest.directory?(dirpath)
       returnval = true
     else
       returnval = false

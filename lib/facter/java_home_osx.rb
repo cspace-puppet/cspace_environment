@@ -14,7 +14,8 @@ Facter.add("java_home_osx") do
   setcode do
     confine :kernel => "Darwin"
     if File.exists?("/usr/libexec/java_home")
-      %x{/usr/libexec/java_home}
+      java_home_val = %x{/usr/libexec/java_home}
+      java_home_val_stripped = java_home_val.strip # remove leading and trailing whitespace, if any
     end
   end
 end
