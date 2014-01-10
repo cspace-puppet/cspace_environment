@@ -57,46 +57,6 @@ class cspace_environment::env {
   $default_db_password_nuxeo     = 'nuxeo'
   $default_db_password           = 'postgres'
   $default_db_user               = 'postgres'
-  
-  # Default JAVA_HOME value varies by platform
-  case $os_family {
-    RedHat, Debian: {
-      notice("java_home_alternatives=${::java_home_alternatives}")
-      # See http://www.oracle.com/technetwork/java/javase/install-linux-rpm-137089.html
-      $default_oracle_java_home = '/usr/java/latest'
-      # The variable below was added as a custom Facter fact via
-      # the lib/facter/java_home_alternatives.rb script in this module.
-      #
-      # If the 'alternatives' system returns the default path to the 'java'
-      # executable file, set JAVA_HOME to its relevant parent directory, if present.
-      if (
-           ($::java_home_alternatives != undef) and
-           (! empty($::java_home_alternatives)) and
-           (directory_exists($::java_home_alternatives))
-         ) {
-        $default_java_home        = $::java_home_alternatives
-      }
-      # Otherwise, use the default directory for Oracle Java installations, if present.
-      elsif (directory_exists($default_oracle_java_home)) {
-        $default_java_home        = $default_oracle_java_home
-      }
-      else {
-        notice('Could not find suitable value for JAVA_HOME environment variable.')
-      }    
-    }
-    # OS X
-    darwin: {
-      # The variable below was added as a custom Facter fact via
-      # the lib/facter/java_home_osx.rb script in this module.
-      $default_java_home          = $::java_home_osx
-    }
-    # Microsoft Windows
-    windows: {
-    }
-    default: {
-    }
-  } # end case $os_family
-    
   $default_lc_all                = 'LC_ALL=en_US.UTF-8'
   $default_maven_opts            =
     '-Xmx768m -XX:MaxPermSize=512m -Dfile.encoding=UTF-8'
@@ -170,13 +130,6 @@ class cspace_environment::env {
     $db_user = $default_db_user
   }
 
-  if ( ($::env_java_home != undef) and (! empty($::env_java_home)) ) {
-    $java_home = $::env_java_home
-  }
-  else {
-    $java_home = $default_java_home
-  }
-
   if ( ($::env_lc_all != undef) and (! empty($::env_lc_all)) ) {
     $lc_all = $::env_lc_all
   }
@@ -201,7 +154,6 @@ class cspace_environment::env {
     'DB_PASSWORD_NUXEO'     => $db_password_nuxeo,
     'DB_PASSWORD'           => $db_password,
     'DB_USER'               => $db_user,
-    'JAVA_HOME'             => $java_home,
     'LC_ALL'                => $lc_all,
     'MAVEN_OPTS'            => $maven_opts,
   }
