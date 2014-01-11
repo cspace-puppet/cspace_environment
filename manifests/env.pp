@@ -18,7 +18,6 @@ class cspace_environment::env {
   
   include cspace_environment::osfamily
   $os_family = $cspace_environment::osfamily::os_family
-  include cspace_environment::env_java_home
 
   # ---------------------------------------------------------
   # Declare environment variables
