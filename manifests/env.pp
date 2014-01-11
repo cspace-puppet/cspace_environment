@@ -58,7 +58,7 @@ class cspace_environment::env {
   $default_db_password_nuxeo     = 'nuxeo'
   $default_db_password           = 'postgres'
   $default_db_user               = 'postgres'
-  $default_java_home             = $cspace_environment::env_java_home::default_java_home
+  $default_java_home             = ''
   $default_lc_all                = 'LC_ALL=en_US.UTF-8'
   $default_maven_opts            =
     '-Xmx768m -XX:MaxPermSize=512m -Dfile.encoding=UTF-8'
