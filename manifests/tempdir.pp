@@ -17,10 +17,10 @@ class cspace_environment::tempdir {
   # ---------------------------------------------------------
 
   # The environment variables below have been added as custom Facter facts
-  # via the lib/facter/env.rb script in this module.
+  # via the lib/facter/env_tmpdir.rb script in this module.
 
   $tmpdir = $::env_tmpdir # 'TMPDIR' under Unix, Linux, and OS X
-  $temp   = $::env_temp   # 'TEMP' under Microsoft Windows
+  # $temp   = $::env_temp   # 'TEMP' under Microsoft Windows
 
   # FIXME: This default/fallback directory is only
   # relevant for most Unix-like systems.  See

@@ -1,13 +1,4 @@
-# Script to add the values of environment variables as custom Facter facts
-#
-# These values are then accessible via variables of the form
-# "${env_environmentvariablenamehere}"; e.g. "${env_home}" for the
-# HOME environment variable.
-
-# Written by Valentin Höbel:
-# http://www.xenuser.org/open-source-development/using-environment-variables-in-puppet/
-# As Valentin notes, "Please do not forget that you have to place that ruby script
-# (env.rb) on every Puppet agent system."
+# Script to add the value of the TMPDIR environment variable as a custom Facter fact
 
 # See also "Custom Facts":
 # http://docs.puppetlabs.com/guides/custom_facts.html
@@ -22,10 +13,9 @@
 # to be safe. Perhaps there may later be a different underlying API call
 # for obtaining the values in that hash? 
 
-ENV.each do |k,v|
-    Facter.add("env_#{k.downcase}".to_sym) do
-        setcode do
-            v
-        end
+Facter.add("env_#{ENV['TMPDIR'].downcase}".to_sym) do
+    setcode do
+        v
     end
 end
+
