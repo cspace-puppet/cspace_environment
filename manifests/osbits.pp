@@ -24,21 +24,28 @@ class cspace_environment::osbits {
   
   # Note: assumes values pertinent to systems with Intel/AMD/equivalent CPUs  
   case $::hardwaremodel {
+    
+    # Known 64-bit designations
     'x86_64', 'IA64', 'ia64', 'AMD64', 'amd64': {
       $os_bits = '64-bit'
     }
+    
     # Other hardware models following this naming convention,
     # ending in a non-digit character followed by '64'
-    /^.*?\D64$/: {
-      $os_bits = '64-bit'
-    }
+    # /^.*?\D64$/: {
+    #   $os_bits = '64-bit'
+    # }
+    
+    # Known 32-bit designations
     # 'i386', 'i486', 'i586', 'i686' ...
     /^i[3-9]86$/: {
       $os_bits = '32-bit'
-    }    
+    } 
+       
     default: {
       fail( 'Could not identify OS virtual address space: unknown hardware model \'$::hardwaremodel\'' )
     }
+    
   }
   
 }

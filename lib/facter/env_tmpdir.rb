@@ -1,4 +1,6 @@
-# Script to add the value of the TMPDIR environment variable as a custom Facter fact
+# Script to add the value of the TMPDIR environment variable, which holds 
+# the location of the system temporary directory on many Unix-like systems,
+# as a custom Facter fact.
 
 # See also "Custom Facts":
 # http://docs.puppetlabs.com/guides/custom_facts.html
@@ -13,9 +15,9 @@
 # to be safe. Perhaps there may later be a different underlying API call
 # for obtaining the values in that hash? 
 
-Facter.add("env_#{ENV['TMPDIR'].downcase}".to_sym) do
+Facter.add("env_tmpdir".to_sym) do
     setcode do
-        v
+        ENV['TMPDIR']
     end
 end
 
