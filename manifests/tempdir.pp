@@ -12,11 +12,10 @@
 #
 class cspace_environment::tempdir {
   
-  # FIXME: This is likely not going to return the correct value
-  # in a master/agent configuration, when running as 'root'
-  # on the agent. See this proposed solution instead:
-  # https://ask.puppetlabs.com/question/5373/how-to-reference-a-users-home-directory/?answer=5381#post-id-5381
-
+  # FIXME: This might not always return the correct value in a
+  # master/agent configuration, when running as 'root' on the
+  # agent, and hence picking up that user's environment variables.
+  
   # ---------------------------------------------------------
   # Identify the system temporary directory
   # ---------------------------------------------------------
