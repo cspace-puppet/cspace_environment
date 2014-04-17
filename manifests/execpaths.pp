@@ -23,9 +23,17 @@ class cspace_environment::execpaths {
   # user's environment, if available.
 
   $linux_default_exec_paths = [
-    '/bin',
     '/usr/bin',
+    '/bin',
   ]
+  
+  $linux_root_exec_paths = [
+    '/usr/local/sbin',
+    '/usr/sbin',
+    '/sbin',
+  ]
+  
+  $linux_combined_exec_paths = unique(flatten( [ $linux_default_exec_paths, $linux_root_exec_paths] ))
 
   # Default executables path for the third-party Homebrew
   # package manager for OS X
