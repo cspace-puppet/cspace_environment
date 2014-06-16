@@ -1,6 +1,6 @@
 {
   "name": "cspace-cspace_environment",
-  "version": "4.1 alpha",
+  "version": "4.1.0",
   "summary": "CollectionSpace Environment Values Management",
   "author": "CollectionSpace",
   "description": "Manages environment values pertinent to a CollectionSpace server instance",
